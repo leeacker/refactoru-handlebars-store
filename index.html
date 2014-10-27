@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Huge, big fun store!</title>
+    <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div id="product-container" class='col-md-8'>
+          <h1>Items for Sale </h1>
+          
+        </div>
+        <div class='col-md-3 text-center' id="wishlist">
+          <h4 class='alert-info'>Wishlist  <button class='btn btn-warning btn-sm' data-toggle='modal' data-target='#wishlistModal'><span class='glyphicon glyphicon-plus' id='add-wishlist'></span></button> </h4>
+          <ul class='list-group' id='wishlist-ul'>
+            
+          </ul>
+          
+        </div>
+      </div>
+    </div>    
+ 
+   <div class="modal fade" id="wishlistModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form action="">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id='modalTitle'>Add Item to Wishlist</h4>
+          </div>
+          <div class="modal-body">
+            
+              <div class="form-group">
+                <input type="text" class='form-control' id='wishlist-add-input' name='wishlist-item' placeholder='Item Name'>
+              </div>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" id='dismiss-wishlist' data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id='wishlist-add-button'>Add Item</button>
+          </div>
+        </form>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.js"></script>
+    <script src="http://fall2014.refactoru.com/public/samples/products-data.js"></script>
+    <script src="main.js"></script>
+    <script id='store-item-template' type='text/x-handlebars-template'>
+      <ul class='list-group'>
+        {{#each productsList}}
+          <li class='list-group-item'>
+            <div class="product row">
+              <div class="col-md-3 col-md-offset-1">
+                <img src= {{image}} alt="" class='img-responsive'>
+              </div>
+              <div class="col-md-6">
+                <h2>{{title}}</h2>
+
+                {{#if sale}}
+                  <p>Price: <del><em>&dollar;{{cost}} </em></del> <span class='text-danger'>
+                    &dollar;{{sale}}</span></p>
+
+                  {{else}}
+                  <p>Price: <em>{{cost}}</em></p>
+                  
+
+                {{/if}}
+                <button id='add-to-wishlist' class='btn btn-warning btn-xs'><span class='glyphicon glyphicon-plus'></span></button>
+              </div>
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+    </script>
+    <script id='wishlist-item-template' type='text/x-handlebars-template'>
+      <li class='list-group-item'>
+        <p> {{title}} <button class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-remove' id='remove-wishlist-item'><span></p>
+
+      </li>
+    </script>
+
+    <script id='wishlist-warning-template' type='text/x-handlebars-template'>
+      <li class="alert alert-danger list-group-item" id='wishlist-warning'>Sorry, {{title}} is already on the list!</li>
+    </script>
+
+  </body>
+</html>
